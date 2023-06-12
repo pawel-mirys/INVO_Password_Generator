@@ -1,35 +1,17 @@
-# INVO Academy JS Starter with Vite
+Brief
 
-In order to see this file in preview mode in VS Code, press ```Ctrl + Shift + V```
+The goal of the task is to code the logic and the best possible reproduction of the design for a random password generator. The generator has the ability to generate passwords of different lengths and complexity levels depending on the user's choice. To test the operation, it is worth testing the password generator provided by LastPass - https://www.lastpass.com/features/password-generator
 
-## Recommended IDE Setup
+se the starter code in the asset package to complete the task. Use the SCSS preprocessor and React framework.
 
-- [VS Code](https://code.visualstudio.com/)
+In the end, the final project should meet the following assumptions:
 
-## How to start your challenge
-
-This is a Universal Starter for all the Advanced INVO Academy Challenges with React. In order to start your challenge, remove all the content inside ```App.tsx``` and start coding :) 
-
-The main file structure is prepered, please make yourslef familiar with it. Your goal is to explore it and extend on your own while development. Feel free to remove all the extra files and code that you don't need.
-
-## How to run your project
-
-If you run your this project for the first time, you need to install npm dependencies by typing
-
-```npm install``` (this is for the one-time installation only)
-
-In order to run your project in a development mode type
-
-```npm run dev```
-
-then open your browser and go to the url showed in the terminal. That's it, if you make any changes in the code, browser will synchronize automatically.
-
-## Building your project
-
-When you are ready to put your project on the Internet, you need to build it. For building, type
-
-```npm run build```
-
-This commend will create a dist folder. This is the folder containing your whole application and that's the only folder that you need to deploy to the server in order to make your app publically available.
-
-## More informations about folder structure and deploying your application you can find inside INVO Academy Knowledge Base
+    The default password length is 6. The user can adjust the length of the password using a slider. The minimum length should be 4, and the maximum 16
+    The default password complexity options should include all options except "Include lowercase"
+    Of all the possible password complexity options, at least one must be selected. It is not possible to deselect all options (then there would be nothing to generate a password from)
+    At the start, the password field should contain a password generated according to the default values
+    The password should be regenerated after each parameter change by the user or after clicking the refresh icon in the password field
+    After clicking the "Copy password" button, the password should be copied to the clipboard
+    The password strength should be calculated based on the password parameters selected by the user. Decide on the exact algorithm for yourself
+    The section should be displayed properly on all types of devices (remember to test responsiveness for all resolutions and on a physical mobile device)
+    The section should have properly handled interactive elements such as links or buttons (the user should feel that something is happening when hovering over an interactive element)
