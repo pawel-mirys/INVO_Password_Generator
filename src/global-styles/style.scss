@@ -1,15 +1,36 @@
 /// Main Styles File
 /// Here we import all the global Styles files we need for our project.
 
-@import "styles/normalize.scss";
-@import "styles/root.scss";
-@import "styles/fonts.scss";
+@import 'styles/normalize.scss';
+@import 'styles/root.scss';
+@import 'styles/fonts.scss';
+@import 'styles/mixins.scss';
 
 body {
-  font-family: 'Roboto', sans-serif;
-  color: var(--color-primary);
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2;
+  line-height: 1.4;
 }
 
-p {
-  color: var(--color-on-surface);
+h1 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2;
+  line-height: 1.4;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.2;
+  line-height: 1.4;
+}
+
+button {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2;
+  line-height: 1.4;
 }
