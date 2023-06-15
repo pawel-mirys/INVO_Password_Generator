@@ -10,7 +10,7 @@ const buttonType = {
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   children?: React.ReactNode;
-  variant?: keyof typeof buttonType;
+  variant: keyof typeof buttonType;
   onClick?: () => void;
 }
 

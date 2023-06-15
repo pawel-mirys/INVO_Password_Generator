@@ -1,6 +1,23 @@
 import React from 'react';
 import styles from './StrenghtBar.module.scss';
+import clsx from 'clsx';
 
-export const StrenghtBar = () => {
-  return <div className={styles.StrenghtBar}></div>;
+const strenghtBarVariant = {
+  poor: styles.strenghtBar__poor,
+  weak: styles.strenghtBar__weak,
+  strong: styles.strenghtBar__strong,
+};
+
+type StrenghtBarProps = {
+  variant: keyof typeof strenghtBarVariant;
+};
+
+export const StrenghtBar = ({ variant }: StrenghtBarProps) => {
+  return (
+    <div
+      className={clsx(
+        styles.strenghtBar,
+        variant && strenghtBarVariant[variant]
+      )}></div>
+  );
 };
