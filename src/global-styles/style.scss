@@ -6,6 +6,10 @@
 @import 'styles/fonts.scss';
 @import 'styles/mixins.scss';
 
+* {
+  background-color: var(--canvas);
+}
+
 body {
   font-family: 'Manrope', sans-serif;
   font-size: 14px;
