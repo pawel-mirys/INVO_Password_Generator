@@ -5,8 +5,8 @@ import { Button } from '@/global-components/Button/Button';
 import { Icon } from '@/global-components/Icon/Icon';
 
 type PasswordOutputProps = {
-  value: string;
-  className: string;
+  value?: string;
+  className?: string;
 };
 
 export const PasswordOutput = ({ value, className }: PasswordOutputProps) => {

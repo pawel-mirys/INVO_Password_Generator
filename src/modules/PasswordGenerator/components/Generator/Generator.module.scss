@@ -1,0 +1,44 @@
+@import '/src/global-styles/styles/mixins.scss';
+
+.generatorContainer {
+  width: 458px;
+  height: auto;
+  padding: 0 24px;
+  background-color: var(--color-white);
+  border-radius: 12px;
+
+  .generatorHeader {
+    margin-top: 40px;
+  }
+
+  .rangeContainer {
+    margin-top: 24px;
+    .rangeContainerHeader {
+      @include flex(space-between, center, row);
+    }
+  }
+
+  .options {
+    margin-top: 32px;
+  }
+
+  .strenghtMeterContainer {
+    padding: 18px 24px;
+    margin-top: 24px;
+    background-color: var(--color-grey);
+    border-radius: 12px;
+
+    .strenghtMeterHeader {
+      @include flex(space-between, center, row);
+      flex-wrap: nowrap;
+    }
+    .strenghtMeter {
+      @include flex(center, center, row);
+      gap: 7px;
+      margin-top: 16px;
+    }
+  }
+  .copyButton {
+    margin: 23px 0 24px 0;
+  }
+}

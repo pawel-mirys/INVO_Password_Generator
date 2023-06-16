@@ -1,9 +1,13 @@
 .strenghtBar {
-  width: auto;
+  flex: 1;
   height: 6px;
-  background-color: var(--strenght-bar-default);
   border-radius: 12px;
 }
+
+.strenghtBar__default {
+  background-color: var(--strenght-bar-default);
+}
+
 .strenghtBar__poor {
   background-color: var(--color-red);
 }
