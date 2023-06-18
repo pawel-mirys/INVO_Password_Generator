@@ -7,17 +7,20 @@ import { Icon } from '@/global-components/Icon/Icon';
 type PasswordOutputProps = {
   value?: string;
   className?: string;
+  children?: React.ReactNode;
+  onClick?: () => void;
 };
 
-export const PasswordOutput = ({ value, className }: PasswordOutputProps) => {
+export const PasswordOutput = ({
+  value,
+  children,
+  className,
+  onClick,
+}: PasswordOutputProps) => {
   return (
     <div className={clsx(styles.passwordOutput, className)}>
-      PTx1O234DSR%
-      <Button
-        variant='icon'
-        onClick={() => {
-          console.log('refresh pswrd');
-        }}>
+      {children}
+      <Button variant='icon' onClick={onClick}>
         <Icon name='refresh' size={20} />
       </Button>
     </div>

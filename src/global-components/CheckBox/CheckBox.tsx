@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { LegacyRef } from 'react';
 import styles from './CheckBox.module.scss';
 import clsx from 'clsx';
 
@@ -7,6 +7,8 @@ interface CheckBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   id: string;
   labelText?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isDefaultChecked?: boolean;
 }
 
 export const CheckBox = ({
@@ -14,6 +16,8 @@ export const CheckBox = ({
   name,
   id,
   labelText,
+  onChange,
+  isDefaultChecked,
   ...props
 }: CheckBoxProps) => {
   return (
@@ -23,6 +27,8 @@ export const CheckBox = ({
         type='checkbox'
         name={name}
         id={id}
+        onChange={onChange}
+        defaultChecked={isDefaultChecked}
       />
       {labelText && (
         <label className={styles.label} htmlFor={name}>
