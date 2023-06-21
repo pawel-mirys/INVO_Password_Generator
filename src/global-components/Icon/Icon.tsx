@@ -8,7 +8,7 @@ type IconProps = {
   className?: string;
 };
 
-export const Icon = ({ name = 'book', size = 25, className }: IconProps) => {
+export const Icon = ({ name = 'copy', size = 25, className }: IconProps) => {
   return (
     <img
       width={size}

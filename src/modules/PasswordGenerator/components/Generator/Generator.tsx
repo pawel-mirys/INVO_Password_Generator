@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styles from './Generator.module.scss';
 import { RangeSlider } from '../RangeSlider/RangeSlider';
 import { CheckBox } from '@/global-components/CheckBox/CheckBox';
@@ -6,6 +7,9 @@ import { StrenghtBar } from '../StrenghtBar/StrenghtBar';
 import { PasswordOutput } from '../PasswordOutput/PasswordOutput';
 import { Button } from '@/global-components/Button/Button';
 import { Icon } from '@/global-components/Icon/Icon';
+import { ReactNotifications } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import { Store } from 'react-notifications-component';
 
 export const Generator = () => {
   const [charAmount, setCharAmount] = useState(6);
@@ -17,6 +21,7 @@ export const Generator = () => {
   const [isLowerCaseCheckced, setIsLowerCaseCheckced] = useState(true);
   const [isNumbersChecked, setIsNumbersCheckced] = useState(false);
   const [isSymbolsChecked, setIsSymbolsCheckced] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (e.target.id) {
@@ -113,6 +118,27 @@ export const Generator = () => {
     setRandomPassword((prev) => (prev = result));
   };
 
+  const handleCopyToClipboard = () => {
+    setIsCopied(true);
+    Store.addNotification({
+      title: 'Success!',
+      message: 'Your new password has been copied!',
+      type: 'default',
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animate__animated', 'animate__fadeIn'],
+      animationOut: ['animate__animated', 'animate__fadeOut'],
+      dismiss: {
+        duration: 1000,
+        onScreen: true,
+      },
+    });
+    setTimeout(() => {
+      setIsCopied(false);
+      generateRandomPassword();
+    }, 1000);
+  };
+
   useEffect(() => {
     generateRandomPassword();
   }, [
@@ -194,9 +220,11 @@ export const Generator = () => {
         {randomPassword.length === 0 && <p>Password length cannot be 0</p>}
         {randomPassword}
       </PasswordOutput>
-      <Button className={styles.copyButton} variant='primary'>
-        <Icon name='copy' size={20} /> Copy Password
-      </Button>
+      <CopyToClipboard text={randomPassword} onCopy={handleCopyToClipboard}>
+        <Button className={styles.copyButton} variant='primary'>
+          <Icon name='copy' size={20} /> Copy Password
+        </Button>
+      </CopyToClipboard>
     </div>
   );
 };
