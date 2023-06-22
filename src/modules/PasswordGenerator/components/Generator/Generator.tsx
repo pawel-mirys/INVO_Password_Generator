@@ -8,12 +8,10 @@ import { PasswordOutput } from '../PasswordOutput/PasswordOutput';
 import { Button } from '@/global-components/Button/Button';
 import { Icon } from '@/global-components/Icon/Icon';
 import { ReactNotifications } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
-import { Store } from 'react-notifications-component';
+import { useGeneratorContext } from '../../contexts/GeneratorContext';
 
 export const Generator = () => {
-  const [charAmount, setCharAmount] = useState(6);
-  const [randomPassword, setRandomPassword] = useState('');
+  const context = useGeneratorContext();
   const [passwordChars, setPasswordChars] = useState<string[]>([
     'abcdefghijklmnopqrstuvwxyz',
   ]);
@@ -21,7 +19,6 @@ export const Generator = () => {
   const [isLowerCaseCheckced, setIsLowerCaseCheckced] = useState(true);
   const [isNumbersChecked, setIsNumbersCheckced] = useState(false);
   const [isSymbolsChecked, setIsSymbolsCheckced] = useState(false);
-  const [isCopied, setIsCopied] = useState(false);
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (e.target.id) {
@@ -91,58 +88,9 @@ export const Generator = () => {
     }
   }, [isSymbolsChecked]);
 
-  const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const defaultValue = e.target.value;
-    const valueToNumber = parseFloat(defaultValue);
-    const fullNumber = Math.floor((valueToNumber * 16) / 100);
-    setCharAmount((prev) => (prev = fullNumber));
-  };
-
-  const getValueFromCharArray = () => {
-    let characters = '';
-    const charactersArray = passwordChars;
-    for (const chars of charactersArray) {
-      characters = characters + chars;
-    }
-    return characters;
-  };
-
-  const generateRandomPassword = () => {
-    let result = '';
-    const charactersLength = getValueFromCharArray().length;
-    for (let i = 0; i < charAmount; i++) {
-      result += getValueFromCharArray().charAt(
-        Math.floor(Math.random() * charactersLength)
-      );
-    }
-    setRandomPassword((prev) => (prev = result));
-  };
-
-  const handleCopyToClipboard = () => {
-    setIsCopied(true);
-    Store.addNotification({
-      title: 'Success!',
-      message: 'Your new password has been copied!',
-      type: 'default',
-      insert: 'top',
-      container: 'top-right',
-      animationIn: ['animate__animated', 'animate__fadeIn'],
-      animationOut: ['animate__animated', 'animate__fadeOut'],
-      dismiss: {
-        duration: 1000,
-        onScreen: true,
-      },
-    });
-    setTimeout(() => {
-      setIsCopied(false);
-      generateRandomPassword();
-    }, 1000);
-  };
-
   useEffect(() => {
-    generateRandomPassword();
+    context?.generateRandomPassword();
   }, [
-    charAmount,
     isLowerCaseCheckced,
     isUpperCaseCheckced,
     isNumbersChecked,
@@ -152,21 +100,7 @@ export const Generator = () => {
   return (
     <div className={styles.generatorContainer}>
       <h1 className={styles.generatorHeader}>Password Generator</h1>
-      <div className={styles.rangeContainer}>
-        <div className={styles.rangeContainerHeader}>
-          <h2>Character Length</h2>
-          <h1>{charAmount}</h1>
-        </div>
-        <RangeSlider
-          minLength={4}
-          maxLength={16}
-          step={1}
-          defaultValue={40}
-          name='strenght'
-          id='strenght'
-          onChange={handleRangeChange}
-        />
-      </div>
+      <RangeSlider />
       <div className={styles.options}>
         <CheckBox
           name='uppercase'
@@ -216,15 +150,15 @@ export const Generator = () => {
           <StrenghtBar variant='poor' />
         </div>
       </div>
-      <PasswordOutput onClick={generateRandomPassword}>
-        {randomPassword.length === 0 && <p>Password length cannot be 0</p>}
-        {randomPassword}
+      <PasswordOutput
+        onClick={() => {
+          context?.generateRandomPassword();
+        }}>
+        {context?.randomPassword.length === 0 && (
+          <p>Password length cannot be 0</p>
+        )}
+        {context?.randomPassword}
       </PasswordOutput>
-      <CopyToClipboard text={randomPassword} onCopy={handleCopyToClipboard}>
-        <Button className={styles.copyButton} variant='primary'>
-          <Icon name='copy' size={20} /> Copy Password
-        </Button>
-      </CopyToClipboard>
     </div>
   );
 };

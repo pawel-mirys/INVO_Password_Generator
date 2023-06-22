@@ -11,13 +11,6 @@
     margin-top: 40px;
   }
 
-  .rangeContainer {
-    margin-top: 24px;
-    .rangeContainerHeader {
-      @include flex(space-between, center, row);
-    }
-  }
-
   .options {
     margin-top: 32px;
   }
@@ -37,8 +30,5 @@
       gap: 7px;
       margin-top: 16px;
     }
-  }
-  .copyButton {
-    margin: 23px 0 24px 0;
   }
 }

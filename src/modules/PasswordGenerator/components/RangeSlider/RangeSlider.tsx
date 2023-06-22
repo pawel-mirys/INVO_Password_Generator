@@ -1,40 +1,26 @@
 import React from 'react';
 import styles from './RangeSlider.module.scss';
-import clsx from 'clsx';
 
-interface RangeSliderProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  className?: string;
-  minLength: number;
-  maxLength: number;
-  step: number;
-  defaultValue: number;
-  name: string;
-  id: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { useGeneratorContext } from '../../contexts/GeneratorContext';
+import { RangeSliderContainer } from './RangeSliderContainer';
 
-export const RangeSlider = ({
-  className,
-  minLength,
-  maxLength,
-  step,
-  defaultValue,
-  name,
-  id,
-  onChange,
-  ...props
-}: RangeSliderProps) => {
+export const RangeSlider = () => {
+  const generatorContext = useGeneratorContext();
+
   return (
-    <input
-      className={clsx(styles.rangeSlider, className)}
-      onChange={onChange}
-      minLength={minLength}
-      maxLength={maxLength}
-      defaultValue={defaultValue}
-      step={step}
-      type='range'
-      name={name}
-      id={id}
-    />
+    <div className={styles.rangeContainer}>
+      <div className={styles.rangeContainerHeader}>
+        <h2>Character Length</h2>
+        <h1>{generatorContext?.charAmount}</h1>
+      </div>
+      <RangeSliderContainer
+        minLength={4}
+        maxLength={16}
+        step={1}
+        defaultValue={40}
+        name='strenght'
+        id='strenght'
+      />
+    </div>
   );
 };
