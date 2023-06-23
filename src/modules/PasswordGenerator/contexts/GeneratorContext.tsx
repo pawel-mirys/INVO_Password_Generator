@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState, useContext } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
 export const useGeneratorContext = () => {
   const context = useContext(GeneratorContext);
@@ -15,6 +15,7 @@ const GeneratorContext = createContext<{
   passwordChars: string[];
   setCharacterAmount: (numberOfCharacters: number) => void;
   generateRandomPassword: () => void;
+  setPasswordChars: React.Dispatch<React.SetStateAction<string[]>>;
 } | null>(null);
 
 export const GeneratorContextProvider = ({ children }: ContextProps) => {
@@ -56,6 +57,7 @@ export const GeneratorContextProvider = ({ children }: ContextProps) => {
         passwordChars,
         setCharacterAmount,
         generateRandomPassword,
+        setPasswordChars,
       }}>
       {children}
     </GeneratorContext.Provider>
