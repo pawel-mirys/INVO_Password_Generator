@@ -1,5 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
-
+import React, { createContext, useState, useContext, useEffect } from 'react';
 export const useGeneratorContext = () => {
   const context = useContext(GeneratorContext);
   return context;
@@ -12,52 +11,104 @@ type ContextProps = {
 const GeneratorContext = createContext<{
   charAmount: number;
   randomPassword: string;
-  passwordChars: string[];
-  setCharacterAmount: (numberOfCharacters: number) => void;
+  isUpperCaseCheckced: boolean;
+  isLowerCaseCheckced: boolean;
+  isNumbersChecked: boolean;
+  isSymbolsChecked: boolean;
   generateRandomPassword: () => void;
-  setPasswordChars: React.Dispatch<React.SetStateAction<string[]>>;
+  setCharacterAmount: (numberOfCharacters: number) => void;
+  handleOptionCheck: (e: React.ChangeEvent<HTMLInputElement>) => void;
 } | null>(null);
 
 export const GeneratorContextProvider = ({ children }: ContextProps) => {
   const [charAmount, setCharAmount] = useState(6);
   const [randomPassword, setRandomPassword] = useState('');
-  const [passwordChars, setPasswordChars] = useState<string[]>([
-    'abcdefghijklmnopqrstuvwxyz',
-  ]);
+  const [passwordChars, setPasswordChars] = useState(
+    'abcdefghijklmnopqrstuwvxyz'
+  );
+  const [isUpperCaseCheckced, setIsUpperCaseCheckced] = useState(false);
+  const [isLowerCaseCheckced, setIsLowerCaseCheckced] = useState(true);
+  const [isNumbersChecked, setIsNumbersCheckced] = useState(false);
+  const [isSymbolsChecked, setIsSymbolsCheckced] = useState(false);
+
+  const handleOptionCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    switch (e.target.id) {
+      case 'uppercase':
+        setIsUpperCaseCheckced((prev) => !prev);
+        if (e.target.checked === true) {
+          setPasswordChars((prev) => (prev += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'));
+        } else {
+          setPasswordChars((prev) =>
+            prev.replace('ABCDEFGHIJKLMNOPQRSTUVWXYZ', '')
+          );
+        }
+        break;
+      case 'lowercase':
+        setIsLowerCaseCheckced((prev) => !prev);
+        if (e.target.checked === true) {
+          setPasswordChars((prev) => (prev += 'abcdefghijklmnopqrstuwvxyz'));
+        } else {
+          setPasswordChars((prev) =>
+            prev.replace('abcdefghijklmnopqrstuwvxyz', '')
+          );
+        }
+        break;
+      case 'numbers':
+        setIsNumbersCheckced((prev) => !prev);
+        if (e.target.checked === true) {
+          setPasswordChars((prev) => (prev += '123456789'));
+        } else {
+          setPasswordChars((prev) => prev.replace('123456789', ''));
+        }
+        break;
+      case 'symbols':
+        setIsSymbolsCheckced((prev) => !prev);
+        if (e.target.checked === true) {
+          setPasswordChars((prev) => (prev += '!@#$%^&*()_+'));
+        } else {
+          setPasswordChars((prev) => prev.replace('!@#$%^&*()_+', ''));
+        }
+        break;
+    }
+  };
 
   const setCharacterAmount = (numberOfCharacters: number) => {
     setCharAmount((prev) => (prev = numberOfCharacters));
   };
 
-  const getValueFromCharArray = () => {
-    let characters = '';
-    const charactersArray = passwordChars;
-    for (const chars of charactersArray) {
-      characters = characters + chars;
-    }
-    return characters;
-  };
-
   const generateRandomPassword = () => {
     let result = '';
-    const charactersLength = getValueFromCharArray().length;
+    const charactersLength = passwordChars.length;
     for (let i = 0; i < charAmount; i++) {
-      result += getValueFromCharArray().charAt(
+      result += passwordChars.charAt(
         Math.floor(Math.random() * charactersLength)
       );
     }
     setRandomPassword((prev) => (prev = result));
   };
 
+  useEffect(() => {
+    generateRandomPassword();
+  }, [
+    charAmount,
+    isLowerCaseCheckced,
+    isUpperCaseCheckced,
+    isNumbersChecked,
+    isSymbolsChecked,
+  ]);
+
   return (
     <GeneratorContext.Provider
       value={{
         charAmount,
         randomPassword,
-        passwordChars,
-        setCharacterAmount,
+        isUpperCaseCheckced,
+        isLowerCaseCheckced,
+        isNumbersChecked,
+        isSymbolsChecked,
         generateRandomPassword,
-        setPasswordChars,
+        setCharacterAmount,
+        handleOptionCheck,
       }}>
       {children}
     </GeneratorContext.Provider>
