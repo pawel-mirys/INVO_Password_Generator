@@ -3,7 +3,7 @@ import styles from './StrenghtBar.module.scss';
 import clsx from 'clsx';
 
 const strenghtBarVariant = {
-  default: styles.strnghtBar__default,
+  default: styles.strenghtBar__default,
   poor: styles.strenghtBar__poor,
   weak: styles.strenghtBar__weak,
   strong: styles.strenghtBar__strong,

@@ -73,4 +73,8 @@
   .rangeContainerHeader {
     @include flex(space-between, center, row);
   }
+
+  @media (max-width: 834px) {
+    margin-top: 16px;
+  }
 }

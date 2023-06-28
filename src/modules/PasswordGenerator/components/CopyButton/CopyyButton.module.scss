@@ -1,3 +1,7 @@
+@import '/src/global-styles/style.scss';
+
 .copyButton {
+  @include flex(center, center, row);
   margin: 23px 0 24px 0;
+  gap: 10px;
 }

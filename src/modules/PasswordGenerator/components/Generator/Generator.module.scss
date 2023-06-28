@@ -10,4 +10,11 @@
   .generatorHeader {
     margin-top: 40px;
   }
+  @media (max-width: 834px) {
+    width: calc(100% - 64px);
+    padding: 0 16px;
+    .generatorHeader {
+      margin-top: 32px;
+    }
+  }
 }
