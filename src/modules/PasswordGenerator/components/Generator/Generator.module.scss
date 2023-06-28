@@ -1,0 +1,20 @@
+@import '/src/global-styles/styles/mixins.scss';
+
+.generatorContainer {
+  width: 458px;
+  height: auto;
+  padding: 0 24px;
+  background-color: var(--color-white);
+  border-radius: 12px;
+
+  .generatorHeader {
+    margin-top: 40px;
+  }
+  @media (max-width: 834px) {
+    width: calc(100% - 64px);
+    padding: 0 16px;
+    .generatorHeader {
+      margin-top: 32px;
+    }
+  }
+}

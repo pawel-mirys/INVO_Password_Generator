@@ -1,0 +1,21 @@
+.strenghtBar {
+  flex: 1;
+  height: 6px;
+  border-radius: 12px;
+}
+
+.strenghtBar__default {
+  background-color: var(--strenght-bar-default);
+}
+
+.strenghtBar__poor {
+  background-color: var(--color-red);
+}
+
+.strenghtBar__weak {
+  background-color: var(--color-yellow);
+}
+
+.strenghtBar__strong {
+  background-color: var(--color-green);
+}
